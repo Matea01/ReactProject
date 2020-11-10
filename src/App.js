@@ -1,8 +1,7 @@
+
 import React, { Component } from 'react';
 import './App.css';
-
 import Person from './Person/Person';
-
 
 
 class App extends Component {
@@ -36,8 +35,10 @@ nameChangedHandler = (event,id) => {
 
     });
     //spread operator
-    const person={...this.state.persons[personIndex]};
+    const person={...this.state.persons[personIndex]
+    };
     person.name=event.target.value;
+
     const persons =[...this.state.persons];
     persons[personIndex]=person;
 
@@ -64,12 +65,13 @@ deletePersonHandler= (personIndex) => {
 togglePersonsHandler=()=>{
   const doesShow=this.state.showPersons;
   this.setState({showPersons:!doesShow});
-  let persons = null;
+  
 }
 render () {
 
   const styleButton={
-    backgroundColor:'white',
+    backgroundColor:'green',
+    color:'white',
     font:'inherit',
     border:'1px solid blue',
     padding:'8px',
@@ -109,14 +111,24 @@ render () {
         age={this.state.persons[2].age} /> */}
     </div>
     );
+ //styleButton.backgroundColor ='red';
+    
   }
-  
+  const classes=[];
+  if(this.state.persons.length <= 2){
+    classes.push('red'); //classes =['red']
+  }
+  if(this.state.persons.length <= 1){
+    classes.push('bold')//classes=['red','bold'] jer je 1 manje od dva 
+  }
+
     return (
       <div className="App">
         
         
           <h1>React project!</h1>
-         
+          {/* <p className={classes}></p> */}
+          <p className={classes.join(' ')}>This works!!</p>
           <p>Toggle on button  click</p>
           <button style={styleButton} onClick={this.togglePersonsHandler}>Toggle Persons</button>
           { persons}
